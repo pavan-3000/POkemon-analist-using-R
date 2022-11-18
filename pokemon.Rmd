@@ -1,0 +1,150 @@
+---
+title: "Pokemon"
+author: "Pavan"
+date: "2022-11-18"
+output: html_document
+---
+
+## installing the library\
+
+```{r}
+
+library(tidyverse)
+library(skimr)
+library(janitor)
+```
+
+## reading csv file
+
+```{r}
+pokemon<-read.csv("pokemon.csv")
+view(pokemon)
+
+```
+
+
+## cleaning Data
+```{r}
+summary(pokemon)
+```
+```{r}
+colnames(pokemon)
+```
+```{r}
+sum(is.null(pokemon))
+```
+
+
+## renameing the columns
+```{r}
+colnames(pokemon)[colnames(pokemon)=="Type_1"]<- "primary_type"
+colnames(pokemon)[colnames(pokemon)=="Type_2"]<- "second_type"
+
+```
+
+## filtering the data
+```{r}
+min(pokemon$HP)
+```
+```{r}
+max(pokemon$HP)
+```
+```{r}
+min(pokemon$Speed)
+```
+```{r}
+max(pokemon$Speed)
+```
+
+## Filtering only grass type Pokemon
+
+```{r}
+pokemon %>% filter(Type.1=="Grass")->grass_pokemon
+
+view(grass_pokemon)
+```
+
+```{r}
+max(grass_pokemon$Speed)
+```
+```{r}
+min(grass_pokemon$Speed)
+
+```
+```{r}
+
+mean(grass_pokemon$Sp..Atk)
+```
+```{r}
+mean(grass_pokemon$Sp..Def)
+```
+
+## visulizating the data
+```{r warning=FALSE}
+ggplot(data=grass_pokemon)+geom_histogram(mapping = aes(x=HP,fill="HP"))
+```
+
+
+
+```{r warning=FALSE}
+ggplot(data=grass_pokemon)+geom_histogram(mapping = aes(x=Speed))
+
+
+
+
+```
+```{r}
+ggplot(data=grass_pokemon)+geom_bar(mapping=aes(x=Legendary,fill="pokemon"))
+```
+ ## Filtering only fire type Pokemon
+
+```{r}
+pokemon %>% filter(Type.1=="Fire")->Fire_pokemon
+view(Fire_pokemon)
+
+
+
+
+
+
+
+
+
+
+```
+
+```{r}
+min(Fire_pokemon$Speed)
+
+```
+```{r}
+max(Fire_pokemon$Speed)
+
+```
+
+```{r}
+mean(Fire_pokemon$Sp..Atk)
+```
+
+```{r}
+mean(Fire_pokemon$Sp..Def)
+
+
+```
+
+```{r warning=FALSE}
+ggplot(data=Fire_pokemon)+geom_bar(mapping = aes(x=Generation,fill=Generation))
+
+
+```
+
+```{r}
+ggplot(data=Fire_pokemon)+geom_point(mapping=aes(x=Sp..Atk,y=Sp..Def,colours="red"))
+
+```
+
+```{r}
+
+ggplot(data=Fire_pokemon)+geom_point(mapping = aes(x=Attack,y=Defense,colour=Attack))
+```
+
